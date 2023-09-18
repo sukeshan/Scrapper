@@ -1,4 +1,5 @@
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from bs4 import BeautifulSoup
 import time
@@ -104,10 +105,16 @@ def update_csv(link ,driver ):
                            'minExperience' : min ,'maxExperience' : max ,'jobPostedDate' : job_date ,'employmentType' : employment_type ,'education' : education ,
                            'company' : company ,'link' : link ,'source' : 'nakuri.com' }
 
+
 def scrap( ):
 
     page =1
-    driver = webdriver.Chrome()
+    options = Options()
+    options.add_argument("--headless")
+    user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36'
+    options.add_argument(f'user-agent={user_agent}')
+    driver = webdriver.Chrome(options=options)
+
     client = MongoClient("mongodb://senseaiuser:CELSmLz79ckvZCgZ@ec2-3-236-54-19.compute-1.amazonaws.com:27017/aidata?authSource=aidata&readPreference=primary&appname=MongoDB%20Compass%20Community&ssl=false")
     database = client["aidata"] # Change the DB Name ,If you want
     collection = database["naukri_scrapped_job_descriptions"] # Change the collection name, if you want
