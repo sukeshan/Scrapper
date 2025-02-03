@@ -115,7 +115,7 @@ def scrap( ):
     options.add_argument(f'user-agent={user_agent}')
     driver = webdriver.Chrome(options=options)
 
-    client = MongoClient("mongodb://senseaiuser:CELSmLz79ckvZCgZ@ec2-3-236-54-19.compute-1.amazonaws.com:27017/aidata?authSource=aidata&readPreference=primary&appname=MongoDB%20Compass%20Community&ssl=false")
+    client = MongoClient("DataBase Link")
     database = client["aidata"] # Change the DB Name ,If you want
     collection = database["naukri_scrapped_job_descriptions"] # Change the collection name, if you want
     DB_links = list(set([dp['link'] for dp in collection.find() ]))
